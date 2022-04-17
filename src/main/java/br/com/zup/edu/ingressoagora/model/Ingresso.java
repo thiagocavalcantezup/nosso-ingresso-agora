@@ -1,6 +1,7 @@
 package br.com.zup.edu.ingressoagora.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @Entity
 public class Ingresso {
@@ -37,20 +41,34 @@ public class Ingresso {
     @Deprecated
     public Ingresso() {}
 
+    public void cancelar() {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+
+        if (!isNaoConsumido()) {
+            throw new ResponseStatusException(
+                status, "Impossível cancelar o ingresso. Ele já foi cancelado ou consumido."
+            );
+        }
+
+        if (!isDentroDoPrazoDeCancelamento()) {
+            throw new ResponseStatusException(
+                status, "Impossível cancelar o ingresso. Ele está fora do prazo de cancelamento."
+            );
+        }
+
+        estado = EstadoIngresso.CANCELADO;
+    }
+
     public boolean isNaoConsumido() {
         return this.estado.equals(EstadoIngresso.NAOCONSUMIDO);
     }
 
+    public boolean isDentroDoPrazoDeCancelamento() {
+        return ChronoUnit.DAYS.between(LocalDateTime.now(), evento.getData()) >= 1;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public void setEstado(EstadoIngresso estado) {
-        this.estado = estado;
-    }
-
-    public Evento getEvento() {
-        return evento;
     }
 
     public void setEvento(Evento evento) {

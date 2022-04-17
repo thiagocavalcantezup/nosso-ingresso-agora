@@ -1,8 +1,5 @@
 package br.com.zup.edu.ingressoagora.controller;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-
 import javax.transaction.Transactional;
 
 import org.springframework.http.HttpStatus;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.zup.edu.ingressoagora.model.EstadoIngresso;
 import br.com.zup.edu.ingressoagora.model.Ingresso;
 import br.com.zup.edu.ingressoagora.repository.IngressoRepository;
 
@@ -40,21 +36,7 @@ public class IngressoController {
                                                   )
                                               );
 
-        if (!ingresso.isNaoConsumido()) {
-            throw new ResponseStatusException(
-                HttpStatus.UNPROCESSABLE_ENTITY,
-                "Impossível cancelar o ingresso. Ele já foi cancelado ou consumido."
-            );
-        }
-
-        if (ChronoUnit.DAYS.between(LocalDateTime.now(), ingresso.getEvento().getData()) < 1) {
-            throw new ResponseStatusException(
-                HttpStatus.UNPROCESSABLE_ENTITY,
-                "Impossível cancelar o ingresso. O cancelamento deve ser feito com no mínimo um dia de antecedência."
-            );
-        }
-
-        ingresso.setEstado(EstadoIngresso.CANCELADO);
+        ingresso.cancelar();
         ingressoRepository.save(ingresso);
 
         return ResponseEntity.noContent().build();

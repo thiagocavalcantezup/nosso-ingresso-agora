@@ -30,11 +30,10 @@ public class DataLoader implements CommandLineRunner {
         );
         eventoRepository.save(evento1);
 
-        Ingresso ingressoConsumido = new Ingresso();
+        Ingresso ingressoConsumido = new Ingresso(EstadoIngresso.CONSUMIDO);
         ingressoConsumido.setEvento(evento1);
-        ingressoConsumido.setEstado(EstadoIngresso.CONSUMIDO);
 
-        Ingresso ingressoCancelavel = new Ingresso();
+        Ingresso ingressoCancelavel = new Ingresso(EstadoIngresso.NAOCONSUMIDO);
         ingressoCancelavel.setEvento(evento1);
 
         ingressoRepository.save(ingressoConsumido);
@@ -49,7 +48,7 @@ public class DataLoader implements CommandLineRunner {
         );
         eventoRepository.save(evento2);
 
-        Ingresso ingresso = new Ingresso();
+        Ingresso ingresso = new Ingresso(EstadoIngresso.NAOCONSUMIDO);
         ingresso.setEvento(evento2);
 
         ingressoRepository.save(ingresso);
