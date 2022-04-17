@@ -1,7 +1,5 @@
 package br.com.zup.edu.ingressoagora.model;
 
-import static br.com.zup.edu.ingressoagora.model.EstadoIngresso.NAOCONSUMIDO;
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -21,7 +19,7 @@ public class Ingresso {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private EstadoIngresso estado = NAOCONSUMIDO;
+    private EstadoIngresso estado = EstadoIngresso.NAOCONSUMIDO;
 
     @Column(nullable = false)
     private LocalDateTime compradoEm = LocalDateTime.now();
@@ -39,8 +37,20 @@ public class Ingresso {
     @Deprecated
     public Ingresso() {}
 
+    public boolean isNaoConsumido() {
+        return this.estado.equals(EstadoIngresso.NAOCONSUMIDO);
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setEstado(EstadoIngresso estado) {
+        this.estado = estado;
+    }
+
+    public Evento getEvento() {
+        return evento;
     }
 
 }

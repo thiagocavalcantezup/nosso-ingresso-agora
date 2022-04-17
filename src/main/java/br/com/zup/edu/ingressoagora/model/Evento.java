@@ -1,7 +1,7 @@
 package br.com.zup.edu.ingressoagora.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Evento {
     private String titulo;
 
     @Column(nullable = false)
-    private LocalDate data;
+    private LocalDateTime data;
 
     @OneToMany(mappedBy = "evento")
     private List<Ingresso> ingressos = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Evento {
     @Column(nullable = false)
     private BigDecimal preco;
 
-    public Evento(String titulo, LocalDate data, BigDecimal preco) {
+    public Evento(String titulo, LocalDateTime data, BigDecimal preco) {
         this.titulo = titulo;
         this.data = data;
         this.preco = preco;
@@ -41,6 +41,10 @@ public class Evento {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDateTime getData() {
+        return data;
     }
 
 }
