@@ -1,0 +1,1 @@
+{"info":{"name":"nosso-ingresso-agora","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},"item":[{"name":"Cancel Ingresso","request":{"method":"PUT","url":{"raw":"http://localhost:8080/api/ingressos/1/cancelar","protocol":"http","host":["localhost:8080"],"path":["api","ingressos","1","cancelar"],"port":"8080"}}}]}
