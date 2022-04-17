@@ -39,6 +39,11 @@ public class Evento {
 
     public Evento() {}
 
+    public void adicionar(Ingresso ingresso) {
+        ingresso.setEvento(this);
+        this.ingressos.add(ingresso);
+    }
+
     public Long getId() {
         return id;
     }

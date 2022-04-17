@@ -53,4 +53,8 @@ public class Ingresso {
         return evento;
     }
 
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
 }
