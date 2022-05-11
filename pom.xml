@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.zup.edu</groupId>
-	<artifactId>ingressoagora</artifactId>
+	<artifactId>marketplace</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ingressoagora</name>
+	<name>marketplace</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -31,8 +31,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
